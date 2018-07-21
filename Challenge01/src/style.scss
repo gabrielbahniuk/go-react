@@ -1,0 +1,79 @@
+@import url("https://fonts.googleapis.com/css?family=Roboto");
+
+body,
+html {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  font-family: "Roboto", sans-serif;
+}
+
+.header {
+  min-height: 5vh;
+  display: flex;
+  background-color: #4267b2;
+  justify-content: center;
+  border-bottom: solid 1px #29487d;
+  h2 {
+    font-size: 20px;
+    color: #fff;
+    margin: 0.5em 0 0.5em 0;
+  }
+}
+
+.content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 0;
+  background-color: #e9ebee;
+}
+
+.post {
+  min-height: 20vh;
+  width: 700px;
+  margin: 15px 0 15px 0;
+  padding: 30px;
+  border: 1px solid #ccc;
+  background-color: #fff;
+  border-radius: 3px;
+  &:first-child {
+    margin-top: 30px;
+  }
+  &:last-child {
+    margin-bottom: 30px;
+  }
+}
+.avatar {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+}
+.author {
+  font-weight: bold;
+  margin: 0;
+  font-size: 16px;
+  color: #666;
+}
+
+.time {
+  margin: 0;
+  font-size: 14px;
+  color: #999;
+}
+
+.postContent {
+  padding-top: 1em;
+  border-top: 1px solid #eee;
+  font-size: 16px;
+  color: #333;
+}
+
+.postHeader {
+  display: flex;
+  align-items: center;
+}
+
+.headerContent {
+  margin-left: 1.5em;
+}
