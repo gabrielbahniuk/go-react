@@ -1,6 +1,6 @@
 import React, { Component, Fragment } from 'react';
 import Header from './Header';
-import Content from './Content';
+import Post from './Post';
 
 export default class App extends Component {
   state = {
@@ -37,7 +37,9 @@ export default class App extends Component {
     return (
       <Fragment>
         <Header />
-        <Content data={posts} />
+        <section className="content">
+          {posts && posts.map(post => <Post key={post.id} data={post} />)}
+        </section>
       </Fragment>
     );
   }
