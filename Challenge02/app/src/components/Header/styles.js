@@ -5,6 +5,7 @@ export const HeaderContainer = styled.section`
     height: 100px;
     background: #fff;
     width: 100%;
+    display: flex;
     align-items: center;
     justify-content: space-between;
     padding: 30px;
