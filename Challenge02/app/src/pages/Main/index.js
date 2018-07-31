@@ -1,63 +1,52 @@
 import React, { Component } from 'react';
 import Sidebar from '../../components/Sidebar';
+import Content from '../../components/Content';
 import { Container } from './styles';
 import api from '../../services/api';
 export default class Main extends Component {
-    state = {
-        currentRepository: '',
-        repositories: [],
-        repositoryInput: '',
-        issues: []
-    };
+    constructor(props) {
+        super(props);
+        this.state = {
+            loading: false,
+            select: 'all',
+            repository: {},
+            issues: []
+        };
+    }
 
-    loadIssues = async e => {
-        e.preventDefault();
-        const { repositoryInput } = this.state;
+    loadIssues = async (e, repository, select = 'all') => {
+        this.setState({
+            loading: true,
+            select,
+            repository: {}
+        });
         try {
             const { data: issues } = await api.get(
-                `/repos/${repositoryInput}/issues?state=all`
+                `/repos/${repository.full_name}/issues?state=${select}`
             );
-            console.log(e.target);
+
             this.setState({
-                issues,
-                currentRepository: e.target
+                repository,
+                issues
             });
         } catch (err) {
             console.log(err);
+        } finally {
+            this.setState({ loading: false });
         }
-    };
-
-    handleAddRepository = async e => {
-        e.preventDefault();
-        const { repositories, repositoryInput } = this.state;
-        try {
-            const { data: repository } = await api.get(
-                `/repos/${repositoryInput}`
-            );
-            this.setState({
-                repositories: [...repositories, repository]
-            });
-        } catch (err) {
-            console.log(err);
-        }
-    };
-
-    onChange = e => {
-        e.preventDefault();
-        this.setState({ repositoryInput: e.target.value });
     };
 
     render() {
+        const { repository, loading, issues, select } = this.state;
         return (
             <Container>
-                <Sidebar
-                    currentRepository={this.state.currentRepository}
-                    issues={this.state.issues}
-                    loadIssues={this.loadIssues.bind(this)}
-                    onChange={this.onChange.bind(this)}
-                    repositoryInput={this.state.repositoryInput}
-                    repositories={this.state.repositories}
-                    handleAddRepository={this.handleAddRepository.bind(this)}
+                <Sidebar loadIssues={this.loadIssues} />
+                <Content
+                    repository={repository}
+                    loading={loading}
+                    issues={issues}
+                    select={select}
+                    loadIssues={this.loadIssues}
                 />
             </Container>
         );

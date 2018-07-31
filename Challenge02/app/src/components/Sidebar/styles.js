@@ -1,134 +1,54 @@
 import styled from 'styled-components';
 
-export const Container = styled.section`
-    display: flex;
-    width: 100%;
-`;
-export const SidebarContainer = styled.div`
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    max-width: 320px;
-    width: 100%;
-    height: 100vh;
+export const Container = styled.div`
     padding: 30px;
-    background: #fff;
-    box-shadow: 5px 5px 5px #eee;
-    z-index: 1;
-`;
-
-export const MainContent = styled.div`
-    display: flex;
-    flex: 1;
-    flex-direction: column;
-    height: 100%;
+    align-self: stretch;
+    min-height: 100vh;
+    background-color: #fff;
+    box-shadow: 0px 0px 20px #c5c5c5;
+    z-index: 999;
     ul {
-        padding: 10px;
-        display: flex;
-        flex-wrap: wrap;
-        margin-top: 2em;
-        width: 90%;
-
         li {
-            display: flex;
-            flex-direction: row;
-            align-items: center;
-            width: calc(100% / 3.2);
-            background: #fff;
-            padding: 20px;
-            margin: 0 15px 15px 15px;
-            height: 150px;
             list-style: none;
-            border-radius: 5px;
-            .header-text {
-                display: flex;
-                flex-direction: column;
-                button {
-                    border: 0;
-                    background: #b286d1;
-                    color: #fff;
-                    width: 170px;
-                    height: 40px;
-                    border-radius: 5px;
-                    i {
-                    }
-                    a {
-                        color: #fff;
-                        text-decoration: none;
-                        font-size: 14px;
-                        font-weight: bold;
-                    }
-                }
+            margin-bottom: 20px;
+            color: #000;
+            text-decoration: none;
+            opacity: 0.7;
+            cursor: pointer;
+            :hover {
+                opacity: 1;
+                transition: 1s;
             }
-            img {
-                margin-right: 20px;
-                width: 64px;
-                height: 64px;
+            .arrow {
+                position: relative;
+                top: -31px;
+                float: right;
+                color: #bdbdbd;
             }
         }
     }
 `;
 
-export const SidebarHeader = styled.header`
-    form {
-        display: flex;
-        justify-content: center;
-        border-bottom: 2px solid #eee;
-        padding-bottom: 1.5em;
-
-        input {
-            background: #eee;
-            padding: 1.3em;
-            height: 50px;
-            border-radius: 3px;
-            border: none;
-            font-size: 16px;
-            width: 200px;
-        }
-        button {
-            margin: 0;
-            background: #fff;
-            margin-left: 15px;
-            border: 0;
-            font-size: 1em;
-            background: #59ea9a;
-            width: 50px;
-            border-radius: 3px;
-            i {
-                color: #fff;
-            }
-        }
+export const Form = styled.form`
+    display: flex;
+    padding-bottom: 20px;
+    margin-bottom: 20px;
+    border-bottom: 1px solid #eee;
+    input {
+        padding: 15px 10px;
+        margin-right: 10px;
+        border: 0;
+        border-radius: 3px;
+        background-color: #eee;
+        border: ${({ withError }) => (withError ? '2px solid #F00' : 0)};
     }
-`;
-
-export const ReposList = styled.div`
-    li {
-        padding-top: 0.5em;
-        display: flex;
-        list-style: none;
-        margin-top: 1em;
-        width: 280px;
-        align-items: center;
-
-        img {
-            margin-left: 0.5em;
-            width: 45px;
-            height: 45px;
-            border-radius: 2px;
-        }
-        div {
-            width: 100px;
-            margin-left: 1.2em;
-            display: flex;
-            flex-direction: column;
-            small {
-                color: #999;
-            }
-        }
-        i {
-            font-size: 30px;
-            margin-left: 2.5em;
-            color: #999;
-        }
+    button {
+        padding: 0 20px;
+        background: #63f5b8;
+        color: #fff;
+        border: 0;
+        font-size: 20px;
+        font-weight: bold;
+        border-radius: 3px;
     }
 `;
