@@ -1,71 +1,99 @@
-import React from 'react';
-import {
-    Container,
-    SidebarContainer,
-    SidebarHeader,
-    ReposList,
-    MainContent
-} from './styles';
-import Header from '../Header';
+import React, { Component } from 'react';
+import Repository from '../Repository';
+import api from '../../services/api';
+import { Container, Form } from './styles';
 
-const Sidebar = ({
-    repositories,
-    repositoryInput,
-    handleAddRepository,
-    onChange,
-    issues,
-    loadIssues,
-    currentRepository
-}) => (
-    <Container>
-        <SidebarContainer>
-            <SidebarHeader>
-                <form onSubmit={handleAddRepository}>
+export default class Sidebar extends Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            loading: false,
+            repositoryInput: '',
+            repositoryError: false,
+            repositories: []
+        };
+    }
+
+    handleAddRepository = async e => {
+        e.preventDefault();
+
+        const { repositories, repositoryInput } = this.state;
+
+        this.setState({ loading: true });
+
+        try {
+            const { data: repository } = await api.get(
+                `/repos/${repositoryInput}`
+            );
+
+            this.setState({
+                repositoryError: false,
+                repositoryInput: '',
+                repositories: [...repositories, repository]
+            });
+        } catch (err) {
+            this.setState({
+                repositoryError: true
+            });
+        } finally {
+            this.setState({
+                loading: false
+            });
+        }
+    };
+
+    render() {
+        const {
+            repositoryInput,
+            repositoryError,
+            loading,
+            repositories
+        } = this.state;
+
+        const { loadIssues } = this.props;
+
+        return (
+            <Container>
+                <Form
+                    withError={repositoryError}
+                    onSubmit={this.handleAddRepository}
+                >
                     <input
                         type="text"
-                        placeholder="New repository"
+                        placeholder="Novo repositório"
                         value={repositoryInput}
-                        onChange={onChange}
+                        onChange={e =>
+                            this.setState({ repositoryInput: e.target.value })
+                        }
                     />
+
                     <button type="submit">
-                        <i className="fa fa-plus-circle" />
+                        {loading ? (
+                            <i className="fa fa-spinner fa-pulse" />
+                        ) : (
+                            <i className="fa fa-plus-circle" />
+                        )}
                     </button>
-                </form>
-            </SidebarHeader>
+                </Form>
 
-            <ReposList>
-                {repositories.map(repo => (
-                    <li key={repo.id}>
-                        <img src={repo.owner.avatar_url} alt={repo.login} />
-                        <div>
-                            <strong>{repo.name}</strong>
-                            <small>{repo.owner.login}</small>
-                        </div>
-                        <i className="fa fa-angle-right" onClick={loadIssues} />
-                    </li>
-                ))}
-            </ReposList>
-        </SidebarContainer>
+                <ul>
+                    {repositories.map(repository => (
+                        <li key={repository.id}>
+                            <div
+                                onClick={e => loadIssues(e, repository)}
+                                onKeyUp={this.handleKeyUp}
+                                role="presentation"
+                            >
+                                <Repository repository={repository} />
 
-        <MainContent>
-            <Header repo={currentRepository} />
-            <ul>
-                {issues.map(issue => (
-                    <li>
-                        <img src={issue.user.avatar_url} />
-                        <span className="header-text">
-                            <strong>{issue.title}</strong>
-                            <small>{issue.user.login}</small>
-                            <button>
-                                <a target="_blank" href={issue.html_url}>
-                                    ABRIR ISSUE
-                                </a>
-                            </button>
-                        </span>
-                    </li>
-                ))}
-            </ul>
-        </MainContent>
-    </Container>
-);
-export default Sidebar;
+                                <span className="arrow">
+                                    <i className="fa fa-angle-right" />
+                                </span>
+                            </div>
+                        </li>
+                    ))}
+                </ul>
+            </Container>
+        );
+    }
+}
