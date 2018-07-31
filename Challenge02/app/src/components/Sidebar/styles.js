@@ -1,5 +1,9 @@
 import styled from 'styled-components';
 
+export const Container = styled.section`
+    display: flex;
+    width: 100%;
+`;
 export const SidebarContainer = styled.div`
     display: flex;
     flex-direction: column;
@@ -19,29 +23,28 @@ export const SidebarHeader = styled.header`
         justify-content: center;
         border-bottom: 2px solid #eee;
         padding-bottom: 1.5em;
-    }
 
-    input {
-        background: #eee;
-        padding: 1.3em;
-        height: 50px;
-        border-radius: 3px;
-        border: none;
-        font-size: 16px;
-        width: 200px;
-    }
-
-    button {
-        margin: 0;
-        background: #fff;
-        margin-left: 15px;
-        border: 0;
-        font-size: 1em;
-        background: #59ea9a;
-        width: 50px;
-        border-radius: 3px;
-        i {
-            color: #fff;
+        input {
+            background: #eee;
+            padding: 1.3em;
+            height: 50px;
+            border-radius: 3px;
+            border: none;
+            font-size: 16px;
+            width: 200px;
+        }
+        button {
+            margin: 0;
+            background: #fff;
+            margin-left: 15px;
+            border: 0;
+            font-size: 1em;
+            background: #59ea9a;
+            width: 50px;
+            border-radius: 3px;
+            i {
+                color: #fff;
+            }
         }
     }
 `;
@@ -54,13 +57,16 @@ export const ReposList = styled.div`
         margin-top: 1em;
         width: 280px;
         align-items: center;
-        justify-content: space-around;
+
         img {
+            margin-left: 0.5em;
             width: 45px;
             height: 45px;
             border-radius: 2px;
         }
         div {
+            width: 100px;
+            margin-left: 1.2em;
             display: flex;
             flex-direction: column;
             small {
@@ -69,7 +75,7 @@ export const ReposList = styled.div`
         }
         i {
             font-size: 30px;
-            margin-left: 1.5em;
+            margin-left: 2.5em;
             color: #999;
         }
     }
