@@ -35,6 +35,7 @@ export const Form = styled.form`
     margin-bottom: 20px;
     border-bottom: 1px solid #eee;
     input {
+        font-size: 16px;
         padding: 15px 10px;
         margin-right: 10px;
         border: 0;

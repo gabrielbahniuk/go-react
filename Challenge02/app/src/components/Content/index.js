@@ -16,9 +16,9 @@ const Content = ({ repository, loading, issues, loadIssues, select }) => (
                     value={select}
                     onChange={e => loadIssues(e, repository, e.target.value)}
                 >
-                    <option value="all">Todas</option>
-                    <option value="open">Abertas</option>
-                    <option value="closed">Fechadas</option>
+                    <option value="all">All</option>
+                    <option value="open">Opened</option>
+                    <option value="closed">Closed</option>
                 </select>
             </div>
         </Header>
