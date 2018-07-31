@@ -17,6 +17,58 @@ export const SidebarContainer = styled.div`
     z-index: 1;
 `;
 
+export const MainContent = styled.div`
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+    height: 100%;
+    ul {
+        padding: 10px;
+        display: flex;
+        flex-wrap: wrap;
+        margin-top: 2em;
+        width: 90%;
+
+        li {
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            width: calc(100% / 3.2);
+            background: #fff;
+            padding: 20px;
+            margin: 0 15px 15px 15px;
+            height: 150px;
+            list-style: none;
+            border-radius: 5px;
+            .header-text {
+                display: flex;
+                flex-direction: column;
+                button {
+                    border: 0;
+                    background: #b286d1;
+                    color: #fff;
+                    width: 170px;
+                    height: 40px;
+                    border-radius: 5px;
+                    i {
+                    }
+                    a {
+                        color: #fff;
+                        text-decoration: none;
+                        font-size: 14px;
+                        font-weight: bold;
+                    }
+                }
+            }
+            img {
+                margin-right: 20px;
+                width: 64px;
+                height: 64px;
+            }
+        }
+    }
+`;
+
 export const SidebarHeader = styled.header`
     form {
         display: flex;

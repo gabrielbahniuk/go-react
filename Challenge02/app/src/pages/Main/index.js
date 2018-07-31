@@ -4,6 +4,7 @@ import { Container } from './styles';
 import api from '../../services/api';
 export default class Main extends Component {
     state = {
+        currentRepository: '',
         repositories: [],
         repositoryInput: '',
         issues: []
@@ -16,10 +17,11 @@ export default class Main extends Component {
             const { data: issues } = await api.get(
                 `/repos/${repositoryInput}/issues?state=all`
             );
+            console.log(e.target);
             this.setState({
-                issues: [issues]
+                issues,
+                currentRepository: e.target
             });
-            console.log(issues);
         } catch (err) {
             console.log(err);
         }
@@ -49,6 +51,7 @@ export default class Main extends Component {
         return (
             <Container>
                 <Sidebar
+                    currentRepository={this.state.currentRepository}
                     issues={this.state.issues}
                     loadIssues={this.loadIssues.bind(this)}
                     onChange={this.onChange.bind(this)}

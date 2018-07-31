@@ -3,6 +3,7 @@ import { HeaderContainer } from './styles';
 
 export default class Header extends Component {
     render() {
+        const { repo } = this.props;
         return (
             <HeaderContainer>
                 <div className="header-container-repo">
@@ -11,7 +12,7 @@ export default class Header extends Component {
                         alt="fb"
                     />
                     <div className="header-title">
-                        <strong>react-navigation</strong>
+                        <strong>{repo}</strong>
                         <small>Facebook</small>
                     </div>
                 </div>
