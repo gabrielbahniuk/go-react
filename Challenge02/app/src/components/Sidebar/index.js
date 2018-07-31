@@ -1,9 +1,10 @@
-import React, { Fragment } from 'react';
+import React from 'react';
 import {
     Container,
     SidebarContainer,
     SidebarHeader,
-    ReposList
+    ReposList,
+    MainContent
 } from './styles';
 import Header from '../Header';
 
@@ -13,7 +14,8 @@ const Sidebar = ({
     handleAddRepository,
     onChange,
     issues,
-    loadIssues
+    loadIssues,
+    currentRepository
 }) => (
     <Container>
         <SidebarContainer>
@@ -45,10 +47,25 @@ const Sidebar = ({
             </ReposList>
         </SidebarContainer>
 
-        <Fragment>
-            <Header />
-            <ul>{issues.map(issue => <li>{issue.url}</li>)}</ul>
-        </Fragment>
+        <MainContent>
+            <Header repo={currentRepository} />
+            <ul>
+                {issues.map(issue => (
+                    <li>
+                        <img src={issue.user.avatar_url} />
+                        <span className="header-text">
+                            <strong>{issue.title}</strong>
+                            <small>{issue.user.login}</small>
+                            <button>
+                                <a target="_blank" href={issue.html_url}>
+                                    ABRIR ISSUE
+                                </a>
+                            </button>
+                        </span>
+                    </li>
+                ))}
+            </ul>
+        </MainContent>
     </Container>
 );
 export default Sidebar;
