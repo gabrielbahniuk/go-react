@@ -60,7 +60,7 @@ export default class Sidebar extends Component {
                 >
                     <input
                         type="text"
-                        placeholder="Novo repositório"
+                        placeholder="New repository..."
                         value={repositoryInput}
                         onChange={e =>
                             this.setState({ repositoryInput: e.target.value })
@@ -81,7 +81,6 @@ export default class Sidebar extends Component {
                         <li key={repository.id}>
                             <div
                                 onClick={e => loadIssues(e, repository)}
-                                onKeyUp={this.handleKeyUp}
                                 role="presentation"
                             >
                                 <Repository repository={repository} />
